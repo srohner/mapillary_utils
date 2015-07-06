@@ -20,7 +20,7 @@ do_stuff() {
 		return
 	fi
 
-	local focusdistanceupper=$(exiftool $file | grep -e "Focus Distance Upper")
+	local focusdistanceupper=$(exiftool "$file" | grep -e "^Focus Distance Upper")
 	if [ ${#focusdistanceupper} -eq 0 ]; then
 		# required exif data not found. grep had no match, since string length is 0, see http://stackoverflow.com/a/17368090
 		return
@@ -32,18 +32,18 @@ do_stuff() {
 
 	if [ "$is_near" -eq 1 ]; then
 		# near
-		mkdir -p $(dirname $file)/$near_dir
-		target_file=$(dirname $file)/$near_dir/$(basename $file)
+		mkdir -p $(dirname "$file")/"$near_dir"
+		target_file=$(dirname "$file")/"$near_dir"/$(basename "$file")
 	else
 		# far
-		mkdir -p $(dirname $file)/$far_dir
-		target_file=$(dirname $file)/$far_dir/$(basename $file)
+		mkdir -p $(dirname "$file")/"$far_dir"
+		target_file=$(dirname "$file")/"$far_dir"/$(basename "$file")
 	fi
 
 	if [ -e "$target_file" ]; then
 		echo "WARNING: Destination file '$target_file' exists. Skipping..."
 	else
-		mv $file $target_file
+		mv "$file" "$target_file"
 	fi
 
 }
