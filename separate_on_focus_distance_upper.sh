@@ -3,7 +3,7 @@
 export limit=1.2     # the distance limit in meters
 export near_dir=near # name of the target directory for pictures BELOW the limit
 export far_dir=far   # name of the target directory for pictures ABOVE the limit
-parallel_options="--noswap" # options to use for GNU parallel
+parallel_options="--noswap -j 200%" # options to use for GNU parallel
 
 if [ $# -lt 1 ]; then
 	echo "This software moves image files with EXIF data in folders '$near_dir' or '$far_dir' based on exiftool's value of the field 'Focus Distance Upper'. The currently defined limit is: ${limit} m."
