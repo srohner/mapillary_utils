@@ -30,7 +30,7 @@ do_stuff() {
 
 	if [ -e "$dstfile" ]; then
 		# destination already exists
-		echo "ERROR: Destination file $dstfile already exists. Skipping file '$srcfile'..."
+		echo "ERROR: Skipping file '$srcfile'. Destination file '$dstfile' already exists."
 		return
 	fi
 
