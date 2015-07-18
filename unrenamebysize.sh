@@ -20,6 +20,11 @@ do_stuff() {
 
 	local dstfile=$(echo "$srcfile" | sed -e "s/^$separator[0-9]\+$separator//")
 
+	if [ "$srcfile" == "$dstfile" ]; then
+		echo "INFO: Skipping file '$srcfile'. It has been already unrenamed."
+		return
+	fi
+
 	if [ -e "$dstfile" ]; then
 		# destination already exists
 		echo "ERROR: Destination file $dstfile already exists. Skipping file '$srcfile'..."
