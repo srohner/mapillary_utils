@@ -1,6 +1,6 @@
 #!/bin/bash
 
-separator="___"
+export separator="___"
 parallel_options="--noswap" # options to use for GNU parallel
 
 if [ $# -lt 1 ]; then
@@ -18,7 +18,7 @@ do_stuff() {
 		return
 	fi
 
-	local dstfile=$(echo "$srcfile" | sed -e 's/___[0-9]\+___//')
+	local dstfile=$(echo "$srcfile" | sed -e "s/^$separator[0-9]\+$separator//")
 
 	if [ -e "$dstfile" ]; then
 		# destination already exists
