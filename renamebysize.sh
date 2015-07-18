@@ -19,7 +19,7 @@ do_stuff() {
 		return
 	fi
 
-	local filesize=$(stat --format=%s $srcfile)
+	local filesize=$(stat --format=%s "$srcfile")
 	local dstfile="${separator}""${filesize}""${separator}""$srcfile"
 
 	if [ -e "$dstfile" ]; then
