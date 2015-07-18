@@ -22,6 +22,12 @@ do_stuff() {
 	local filesize=$(stat --format=%s "$srcfile")
 	local dstfile="${separator}""${filesize}""${separator}""$srcfile"
 
+	if grep -qEe "^$separator[0-9]+$separator" <<< "$srcfile"; then # not high-performance, see http://stackoverflow.com/a/240181
+		# file has been already renamed (probably by a previous run of this script)
+		echo "INFO: Skipping file '$srcfile'. It looks like it has been already renamed."
+		return
+	fi
+
 	if [ -e "$dstfile" ]; then
 		# destination already exists
 		echo "ERROR: Destination file $dstfile already exists. Skipping file '$srcfile'..."
