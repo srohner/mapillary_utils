@@ -10,7 +10,7 @@ if [ $# -lt 1 ]; then
 	exit 1
 fi
 
-do_stuff() {
+unrename() {
 	local srcfile="$1"
 
 	if [ ! -f "$srcfile" ]; then
@@ -33,6 +33,6 @@ do_stuff() {
 
 	mv "$srcfile" "$dstfile"
 }
-export -f do_stuff
+export -f unrename
 
-parallel $parallel_options do_stuff ::: "$@"
+parallel $parallel_options unrename ::: "$@"
